@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="background center"></div>
+        <div class="clock">
+            <div class="hr center"></div>
+             <div class="min center"></div>
+            <div class="sec center"></div>
+            <div class="circle center"></div>
+        </div>
+
+    </body>
+</html>
+<script type="text/javascript" src="vanilla-tilt.js"></script>
+
+<script>
+    VanillaTilt.init(document.querySelector(".clock"), {
+        max: 25,
+        speed: 400
+    });
+    VanillaTilt.init(document.querySelectorAll(".clock"));
+
+    const hr = document.querySelector('.hr');
+    const mn = document.querySelector('.min');
+    const sc = document.querySelector('.sec');
+    const time = document.querySelector('.time');
+
+    setInterval(() => {
+        let day = new Date();
+        let hour = day.getHours();
+        let min = day.getMinutes();
+        let sec = day.getSeconds();
+
+        let hrPosition = hour * 30 + min / 2 // hour * 360/12 + ((min * 360/60)/12)
+        let minPosition = min * 6; // min * 360/60
+        let secPosition = sec * 6; // sec * 360/60
+
+        hr.style.transform = `rotateZ(${hrPosition}deg)`;
+        mn.style.transform = `rotateZ(${minPosition}deg)`;
+        sc.style.transform = `rotateZ(${secPosition}deg)`;
+
+        if (sec < 10) {
+            sec = '0' + sec;
+        }
+        if (min < 10) {
+            min = '0' + min;
+        }
+        if (hour < 10) {
+            hour = '0' + hour;
+        }
+
+        time.textContent = hour + ' : ' + min + ' : ' + sec;
+
+    }, 1000);
+</script>
