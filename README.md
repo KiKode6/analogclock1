@@ -1,1 +1,1 @@
-![screenshot](img/analogclock.png)
+![screenshot](analogclock/img/analogclock.png)
